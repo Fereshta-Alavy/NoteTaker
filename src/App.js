@@ -25,11 +25,12 @@ function App() {
     return false;
   }
   async function handleAddNote(event) {
+    const input = { note };
     event.preventDefault();
     if (hasExistingNote()) {
       handleUpdateNote();
     } else {
-      const result = await API.graphql(graphqlOperation(createNote, { note }));
+      const result = await API.graphql(graphqlOperation(createNote, { input }));
       const newNote = result.data.createNote;
       const updatedNotes = [newNote, ...notes];
       setNotes(updatedNotes);
